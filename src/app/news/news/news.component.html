@@ -1,0 +1,32 @@
+<div class="news-container">
+  <ol>
+    <li *ngFor="let newsItem of news">
+      <div class="news-item">
+        <div class="news-header-container">
+          <span>{{newsItem.title}}</span>
+          <span class="url-text" *ngIf="newsItem.url">
+            (<a href="{{newsItem.url}}">{{newsItem.url | shortUrl}}</a>)
+          </span>
+        </div>
+        <div class="news-metadata-container">
+          <span>
+            {{newsItem.points}} points
+            by {{newsItem.author}}
+            <ng-container *ngIf="newsItem.story_id">
+             | <a routerLink="story" [queryParams]="{storyId: newsItem.story_id}">comments</a>
+            </ng-container>
+          </span>
+        </div>
+      </div>
+    </li>
+  </ol>
+  <div class="page-navigation">
+    <button class="change-page-button" (click)="changePage(currentPage-1)" [disabled]="currentPage === 0">
+      &lt; previous page
+    </button>
+    {{currentPage | humanReadablePageNumber}}
+    <button class="change-page-button" (click)="changePage(currentPage+1)" [disabled]="currentPage >= allPages">
+      next page &gt;
+    </button>
+  </div>
+</div>

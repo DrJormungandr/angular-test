@@ -1,0 +1,43 @@
+.news-container {
+  padding: 2px 20px 20px 20px;
+  background-color: #ffe4c4ad;
+
+  a {
+    color: gray;
+  }
+
+  li::marker {
+    font-size: 14px;
+    color: gray;
+  }
+
+  .news-item {
+    display: flex;
+    flex-direction: column;
+    margin: 6px 0 6px 0;
+
+    .news-header-container {
+      .url-text {
+        font-size: 14px;
+        color: gray;
+      }
+    }
+
+    .news-metadata-container {
+      color: gray;
+      font-size: 14px;
+    }
+  }
+
+  .page-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px 0 20px;
+    .change-page-button {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+  }
+
+}

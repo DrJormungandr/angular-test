@@ -1,0 +1,26 @@
+<ng-container *ngIf="story">
+  <div class="story-container">
+    <header class="story-title">
+      <p>{{story.title}}</p>
+    </header>
+    <div *ngIf="story.text">
+      {{story.text}}
+    </div>
+    <div class="separator"></div>
+    <ng-template #Comments let-comments>
+      <ul>
+        <ng-container *ngFor= "let child of comments">
+          <li class="comment-container">
+            <div class="comment-header">
+              <span>{{child.author}} </span>
+              <span>{{child.created_at | timestampToDate}} </span>
+            </div>
+            <div class="comment-text" [innerHTML]="child.text"></div>
+            <ng-container *ngTemplateOutlet="Comments; context: {$implicit: child.children}"></ng-container>
+          </li>
+        </ng-container>
+      </ul>
+    </ng-template>
+    <ng-container *ngTemplateOutlet="Comments; context: {$implicit: story.children}"></ng-container>
+  </div>
+</ng-container>
