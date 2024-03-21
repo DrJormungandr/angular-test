@@ -22,7 +22,7 @@
   </ol>
   <div class="page-navigation">
     <button class="change-page-button" [routerLink]="['./', {pageNumber: currentPage-1}]" [disabled]="currentPage === 1">
-        &lt; previous page
+      &lt; previous page
     </button>
     {{currentPage}}
     <button class="change-page-button" [routerLink]="['./', {pageNumber: currentPage+1}]" [disabled]="currentPage >= allPages">
