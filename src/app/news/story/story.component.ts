@@ -21,7 +21,7 @@ export class StoryComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.queryParamMap.get('storyId');
-    this.newsService.getStory(id.toString()).subscribe(
+    this.newsService.getStory(id).subscribe(
       (response: StoryResponse) => {
         this.story = response;
       }

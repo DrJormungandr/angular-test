@@ -1,3 +1,4 @@
+import { ActivatedRoute, ParamMap} from '@angular/router';
 import { NewsItem } from '../models/news-item';
 import { NewsResponse } from '../models/news-response';
 import { NewsService } from '../services/news.service';
@@ -14,6 +15,7 @@ export class NewsComponent implements OnInit {
 
   constructor(
     private newsService: NewsService,
+    private route: ActivatedRoute,
   ) { }
 
   public news: Array<NewsItem> = [];
@@ -22,14 +24,19 @@ export class NewsComponent implements OnInit {
   public currentPage = 0;
 
   ngOnInit() {
-    this.getNews(this.currentPage);
+    this.route.paramMap.pipe(
+      tap((params: ParamMap) => {
+        this.currentPage = + params.get('pageNumber') || 1;
+        this.getNews(this.currentPage - 1);
+      })
+    ).subscribe();
+
   }
 
   private getNews(page: number) {
     this.newsService.getFrontPageNews(page.toString()).pipe(
       tap((news: NewsResponse) => {
-        this.currentPage = news.page;
-        this.allPages = news.nbPages - 1;
+        this.allPages = news.nbPages;
       }),
       map((news: NewsResponse) => news.hits)
       ).subscribe(
@@ -38,9 +45,4 @@ export class NewsComponent implements OnInit {
       }
     );
   }
-
-  protected changePage(newPage: number) {
-    this.getNews(newPage);
-  }
-
 }

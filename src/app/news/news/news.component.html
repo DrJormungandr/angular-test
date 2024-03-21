@@ -21,11 +21,11 @@
     </li>
   </ol>
   <div class="page-navigation">
-    <button class="change-page-button" (click)="changePage(currentPage-1)" [disabled]="currentPage === 0">
-      &lt; previous page
+    <button class="change-page-button" [routerLink]="['./', {pageNumber: currentPage-1}]" [disabled]="currentPage === 1">
+        &lt; previous page
     </button>
-    {{currentPage | humanReadablePageNumber}}
-    <button class="change-page-button" (click)="changePage(currentPage+1)" [disabled]="currentPage >= allPages">
+    {{currentPage}}
+    <button class="change-page-button" [routerLink]="['./', {pageNumber: currentPage+1}]" [disabled]="currentPage >= allPages">
       next page &gt;
     </button>
   </div>
